@@ -1,4 +1,12 @@
 on init
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "performance"
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "performance"
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "performance"
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "performance"
+
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
@@ -38,11 +46,6 @@ on post-fs-data
     write /sys/module/msm_pm/modes/cpu2/standalone_power_collapse/idle_enabled 1
     write /sys/module/msm_pm/modes/cpu3/standalone_power_collapse/idle_enabled 1
     write /sys/module/msm_pm/modes/cpu0/power_collapse/idle_enabled 1
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "ondemand"
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 50000
-    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
-    write /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy 1
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 4
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
 
     setprop vold.post_fs_data_done 1
