@@ -109,6 +109,7 @@ on post-fs
 on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
+    start mpdecision
 
 on property:sys.cw_home_ready=1
     write /sys/devices/system/cpu/cpu1/online 0
@@ -149,3 +150,7 @@ service bugreport /system/bin/dumpstate -d -p -B \
 
 service clockwork_proxy /system/bin/ClockworkProxy
     class main
+
+service mpdecision /sbin/mpdecision --avg_comp
+   user root
+   disabled
