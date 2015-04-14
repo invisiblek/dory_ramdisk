@@ -6,6 +6,7 @@ on init
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "performance"
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "performance"
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "performance"
+    write /sys/block/mmcblk0/queue/scheduler "noop"
 
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
@@ -110,6 +111,7 @@ on post-fs
     write /sys/class/android_usb/android0/f_ffs/aliases adb
 
 on property:sys.boot_completed=1
+    write /sys/block/mmcblk0/queue/scheduler "row"
     start mpdecision
 
 on property:sys.cw_home_ready=1
