@@ -50,7 +50,6 @@ on post-fs-data
 on boot
     mount debugfs /sys/kernel/debug /sys/kernel/debug
     chown system system /sys/kernel/debug/kgsl/proc
-    chown system system /sys/class/graphics/fb0/idle_mode
     chown system system /sys/bus/i2c/devices/5-0020/idle_mode
 
     setprop ro.radio.noril yes
@@ -86,6 +85,11 @@ on boot
     # disable network time update
     setprop config.disable_networktime true
 
+    # Set the fix freq to 200MHz for KGSL
+    write /sys/class/kgsl/kgsl-3d0/devfreq/max_freq 200000000
+    write /sys/class/kgsl/kgsl-3d0/devfreq/min_freq 200000000
+    write /sys/class/kgsl/kgsl-3d0/devfreq/governor performance
+
 on fs
     mount_all /fstab.dory
     setprop ro.crypto.fuse_sdcard true
@@ -103,12 +107,18 @@ on post-fs
     write /sys/class/android_usb/android0/f_ffs/aliases adb
 
 on property:sys.boot_completed=1
-    write /sys/devices/system/cpu/cpu1/online 0
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
+
+on property:sys.cw_home_ready=1
+    write /sys/devices/system/cpu/cpu1/online 0
     # Use userspace governor to set min=max=787MHz
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "userspace"
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed 787200
+    write /sys/module/lpm_levels/parameters/sleep_disabled 0
+    # Tell dalvik to only use one thread
+    setprop dalvik.vm.dex2oat-threads 1
+    setprop dalvik.vm.image-dex2oat-threads 1
 
 # dhcp daemon for bt tethering
 service dhcpcd_bt-pan /system/bin/dhcpcd -BKLG

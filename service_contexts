@@ -103,7 +103,7 @@ sip                                       u:object_r:radio_service:s0
 statusbar                                 u:object_r:system_server_service:s0
 SurfaceFlinger                            u:object_r:surfaceflinger_service:s0
 task                                      u:object_r:system_server_service:s0
-telecom                                   u:object_r:radio_service:s0
+telecom                                   u:object_r:system_server_service:s0
 telephony.registry                        u:object_r:system_server_service:s0
 textservices                              u:object_r:system_server_service:s0
 trust                                     u:object_r:system_server_service:s0
@@ -126,3 +126,5 @@ window                                    u:object_r:system_server_service:s0
 #line 1 "device/google/clockwork/sepolicy/service_contexts"
 ClockworkProxyNativeService                                             u:object_r:clockwork_proxy_service:s0
 com.google.android.clockwork.home.proxy.IClockworkProxyNativeService    u:object_r:system_server_service:s0
+dream_ambient                                                           u:object_r:system_app_service:s0
+activity_ambient                                                        u:object_r:system_app_service:s0
