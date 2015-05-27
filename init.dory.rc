@@ -12,6 +12,14 @@ on init
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "performance"
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "performance"
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "performance"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq "1190400"
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq "1190400"
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq "1190400"
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq "1190400"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq "300000"
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq "300000"
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq "300000"
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq "300000"
     write /sys/block/mmcblk0/queue/scheduler "noop"
 
     # Set permissions for persist partition
@@ -53,12 +61,9 @@ on post-fs-data
     write /sys/module/msm_pm/modes/cpu2/standalone_power_collapse/idle_enabled 1
     write /sys/module/msm_pm/modes/cpu3/standalone_power_collapse/idle_enabled 1
     write /sys/module/msm_pm/modes/cpu0/power_collapse/idle_enabled 1
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "ondemand"
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 50000
-    write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
-    write /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy 1
-    write /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor 4
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
+    write /sys/module/msm_pm/modes/cpu1/power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu2/power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu3/power_collapse/idle_enabled 1
 
     setprop vold.post_fs_data_done 1
 
@@ -67,7 +72,6 @@ on boot
     write /sys/module/msm_thermal/core_control/enabled 0
     # NOTE: The number of cores online should be kept in sync with
     # dalvik.vm.image-dex2oat-threads and dalvik.vm.boot-dex2oat-threads in device.mk
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 787200
     write /sys/module/msm_thermal/core_control/enabled 1
 
     chown system system /sys/kernel/debug/kgsl/proc
@@ -104,13 +108,18 @@ on boot
 on property:sys.boot_completed=1
     write /sys/class/power_supply/battery/charging_enabled 1
     write /sys/block/mmcblk0/queue/scheduler "row"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "userspace"
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "userspace"
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "userspace"
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "userspace"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed "1190400"
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_setspeed "1190400"
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_setspeed "1190400"
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_setspeed "1190400"
     start mpdecision
 
 on property:sys.cw_home_ready=1
     write /sys/module/msm_thermal/core_control/enabled 0
-    # Use userspace governor to set min=max=787MHz
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "userspace"
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed 787200
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
     write /sys/module/msm_thermal/core_control/enabled 1
 
