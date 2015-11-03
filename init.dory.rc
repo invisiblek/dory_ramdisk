@@ -94,6 +94,10 @@ on boot
     write /sys/class/kgsl/kgsl-3d0/devfreq/min_freq 200000000
     write /sys/class/kgsl/kgsl-3d0/devfreq/governor performance
 
+    # Adaptive LMK
+    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
+    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
+
 on fs
     mount_all /fstab.dory
     setprop ro.crypto.fuse_sdcard true
