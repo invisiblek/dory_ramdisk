@@ -6,14 +6,21 @@ ro.allow.mock.location=0
 ro.debuggable=1
 ro.bt.bdaddr_path=/persist/bdaddr.txt
 ro.zygote=zygote32
-persist.adb.notify=0
-bluetooth.force_pm_timer=2000
-persist.sys.media.use-awesome=true
-log.tag.AmbientService=DEBUG
-ro.adb.secure=0
-dalvik.vm.dex2oat-Xms=64m
-dalvik.vm.dex2oat-Xmx=512m
 dalvik.vm.image-dex2oat-Xms=64m
 dalvik.vm.image-dex2oat-Xmx=64m
+dalvik.vm.dex2oat-Xms=64m
+dalvik.vm.dex2oat-Xmx=512m
 ro.dalvik.vm.native.bridge=0
+debug.atrace.tags.enableflags=0
+ro.adb.secure=0
+persist.adb.notify=0
+persist.raft.pump_kmsg=1
+bluetooth.force_pm_timer=2000
+#
+# BOOTIMAGE_BUILD_PROPERTIES
+#
+ro.bootimage.build.date=Mon Feb 1 22:07:31 UTC 2016
+ro.bootimage.build.date.utc=1454364451
+ro.bootimage.build.fingerprint=lge/platina/dory:6.0.1/MEC23G/2576000:user/release-keys
 persist.sys.usb.config=none
+
