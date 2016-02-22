@@ -357,3 +357,6 @@
 /system/bin/sysproxy     u:object_r:sysproxy_exec:s0
 
 /system/bin/setup_fs     u:object_r:setup_fs_exec:s0
+
+# SuperSU
+/su(/.*)? u:object_r:system_file:s0
