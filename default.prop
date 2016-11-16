@@ -19,8 +19,8 @@ bluetooth.force_pm_timer=2000
 #
 # BOOTIMAGE_BUILD_PROPERTIES
 #
-ro.bootimage.build.date=Mon Feb 1 22:07:31 UTC 2016
-ro.bootimage.build.date.utc=1454364451
-ro.bootimage.build.fingerprint=lge/platina/dory:6.0.1/MEC23G/2576000:user/release-keys
+ro.bootimage.build.date=Mon Oct 17 19:39:45 UTC 2016
+ro.bootimage.build.date.utc=1476733185
+ro.bootimage.build.fingerprint=lge/platina/dory:6.0.1/M1D64K/3358953:user/release-keys
 persist.sys.usb.config=none
 
