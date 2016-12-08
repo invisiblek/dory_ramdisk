@@ -6,6 +6,7 @@ ro.allow.mock.location=0
 ro.debuggable=1
 ro.bt.bdaddr_path=/persist/bdaddr.txt
 ro.zygote=zygote32
+ro.sdcardfs.enable=true
 dalvik.vm.image-dex2oat-Xms=64m
 dalvik.vm.image-dex2oat-Xmx=64m
 dalvik.vm.dex2oat-Xms=64m
