@@ -48,3 +48,4 @@ ro.bootimage.build.date.utc=1489521603
 ro.bootimage.build.fingerprint=lge/lenok/lenok:7.1.1/NXG47C/3811204:user/release-keys
 persist.sys.usb.config=none
 
+ro.sdcardfs.enable=true
